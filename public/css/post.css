@@ -1,0 +1,243 @@
+.MainLayout_main-layout__riclp .MainLayout_content__hCocE {
+    flex-grow: 1;
+}
+@media (max-width: 1400px){
+    .container2 {
+        max-width: calc(1320px + 3rem);
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+    }
+}
+.container2, .container-fluid2 {
+   
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+.Breadcrumbs_breadcrumbs__04vpL {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+}
+.Breadcrumbs_breadcrumbs__04vpL .Breadcrumbs_item__e9mbT {
+    display: flex;
+    align-items: center;
+    color: #112950;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    opacity: .3;
+}
+.Breadcrumbs_breadcrumbs__04vpL .Breadcrumbs_item__e9mbT a {
+    color: #112950;
+    text-decoration: none!important;
+}
+.Breadcrumbs_breadcrumbs__04vpL .Breadcrumbs_item__e9mbT+.Breadcrumbs_item__e9mbT {
+    padding-left: 0.5rem;
+}
+.Breadcrumbs_breadcrumbs__04vpL .Breadcrumbs_item-active__3fOia {
+    opacity: 1!important;
+    font-weight: 500;
+}
+.Breadcrumbs_breadcrumbs__04vpL .Breadcrumbs_item__e9mbT+.Breadcrumbs_item__e9mbT:before {
+    float: left;
+    margin-bottom: 7px;
+    padding-right: 0.5rem;
+    content: url('https://www.pharmacity.vn/icons/breadcrumb-dot.svg');
+}
+.Blog_blog-m0__j5UFs {
+    margin: 0!important;
+}
+.container-wrapper {
+    background: #fff;
+}
+.Blog_blog-wrapper___n8s_ .Blog_banner__X5CGL {
+    height: auto;
+    width: 100%;
+    cursor: pointer;
+}
+.Blog_blog-cate-label__ynl_J {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 20px 0;
+}
+.Blog_blog-wrapper___n8s_ .Blog_blog-body__2FJge {
+    display: flex;
+}
+.BlogList_blog-list__z0jDd {
+    width: 75%;
+    border-right: 1px solid #e4e4e4;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+.BlogList_blog-list__z0jDd .BlogList_tabs__SVp3U {
+    display: flex;
+    border-bottom: 1px solid #e5e5e5;
+    height: 55px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    margin: 10px 0;
+    padding: 5px 0;
+}
+.BlogList_blog-list__z0jDd .BlogList_tabs__SVp3U .BlogList_tab-name__QsGiZ.BlogList_active__c9FUI {
+    font-weight: 700;
+    color: #0072bc;
+    letter-spacing: 0;
+}
+.BlogList_blog-list__z0jDd .BlogList_tabs__SVp3U .BlogList_tab-name__QsGiZ:first-child {
+    padding-left: 0;
+}
+.BlogList_blog-list__z0jDd .BlogList_tabs__SVp3U .BlogList_tab-name__QsGiZ {
+    position: relative;
+    padding: 0 1.5%;
+    background-color: transparent;
+    border: 0;
+    letter-spacing: .375px;
+    font-family: RoundedNext;
+    font-size: 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.BlogList_blog-list__z0jDd .BlogList_tabs__SVp3U .BlogList_tab-name__QsGiZ.BlogList_active__c9FUI:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px;
+    height: 3px;
+    background-color: #0072bc;
+    border-radius: 99px 99px 0 0;
+}
+.BlogList_blog-list__z0jDd .BlogList_tab-content__wAL7X {
+    display: grid;
+    --column: 3;
+    grid-template-columns: repeat(var(--column),1fr);
+    flex-wrap: wrap;
+    grid-column-gap: 5%;
+    grid-row-gap: 30px;
+    margin: 32px 0;
+}.BlogItem_blog-item-wrapper__vTNQY {
+    width: 100%;
+}
+.BlogItem_blog-item-wrapper__vTNQY .BlogItem_blog-image__MVwbq {
+    position: relative;
+    cursor: pointer;
+}
+.BlogItem_blog-item-wrapper__vTNQY .BlogItem_blog-image__MVwbq img {
+    height: auto;
+    width: 100%;
+}
+.BlogItem_blog-item-wrapper__vTNQY .BlogItem_blog-title__tciTc {
+    position: relative;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 34px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    color: #000;
+}
+.BlogItem_blog-item-wrapper__vTNQY .BlogItem_blog-title__tciTc:before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #c4c4c4;
+    height: 2px;
+    width: 54px;
+}
+.BlogItem_blog-item-wrapper__vTNQY .BlogItem_blog-content__DAmGV {
+    margin-top: 20px;
+}
+.MenuRight_menu-right__Ed_5q {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_banner__oOm_b {
+    cursor: pointer;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_banner__oOm_b img {
+    height: auto;
+    width: 100%;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_popular-news__cCVHA {
+    margin-top: 20px;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_title__3lJ7U {
+    position: relative;
+    padding: 20px 0;
+    color: #727272;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_title__3lJ7U:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 54px;
+    height: 2px;
+    background-color: #c4c4c4;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_popular-news__cCVHA .MenuRight_list-new__YB1_2 {
+    margin-top: 40px;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_popular-news__cCVHA .MenuRight_list-new__YB1_2 .MenuRight_list-new-item__uRi_0 {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e4e4e4;
+    text-decoration: none;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_popular-news__cCVHA .MenuRight_list-new__YB1_2 .MenuRight_list-new-item__uRi_0 img {
+    height: 50px;
+    width: 90px;
+}
+.MenuRight_menu-right__Ed_5q .MenuRight_popular-news__cCVHA .MenuRight_list-new__YB1_2 .MenuRight_list-new-item__uRi_0 span {
+    color: #0072bc;
+    margin-left: 10px;
+    width: calc(100% - 100px);
+}
+.BlogDetail_blog-detail-wrapper__QJEqf {
+    display: flex;
+}
+@media screen and (min-width: 1200px){
+    .BlogDetail_blog-detail-wrapper__QJEqf {
+        padding: 30px 0;
+    }
+}
+.BlogDetail_blog-detail-wrapper__QJEqf .BlogDetail_blog-detail-content__Hy8Ze {
+    width: 75%;
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: 1px solid #e4e4e4;
+}
+.BlogDetail_blog-detail-wrapper__QJEqf .BlogDetail_blogDetailTitle__b5TZc h1 {
+    text-align: left;
+    position: relative;
+}
+.BlogDetail_blog-detail-wrapper__QJEqf .BlogDetail_blogDetailTitle__b5TZc h1:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 54px;
+    height: 3px;
+    background-color: #e4e4e4;
+}
+.BlogDetail_blog-detail-wrapper__QJEqf .BlogDetail_blog-detail-content__Hy8Ze .BlogDetail_blog-content__Tvryj {
+    word-break: break-word;
+    margin-top: 70px;
+}
+.BlogDetail_blog-content__Tvryj img {
+    max-width: 100%;
+    height: auto;
+}
+.BlogDetail_blog-content__Tvryj p {
+   margin-bottom: 15px;
+}
