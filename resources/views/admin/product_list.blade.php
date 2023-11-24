@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="{{asset('js/bootstrap2.js')}}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+
 </head>
 <body class="g-sidenav-show  bg-gray-100">
     @include('partial.slidenav')
@@ -24,7 +24,7 @@
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
               </ol> --}}
-              
+
               <h6 class="font-weight-bolder mb-0">Danh sách sản phẩm</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -43,13 +43,13 @@
                             $name = Session::get('admin_name');
                             if($name){
                                 echo $name;
-                                
+
                             }
                             ?>
                       </span>
                     </a>
                 </li>
-               
+
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                   <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                     <div class="sidenav-toggler-inner">
@@ -69,27 +69,27 @@
                     aria-expanded="false">
                     <i class="fa fa-bell cursor-pointer"></i>
                   </a>
-                 
+
                 </li>
 
-                
+
               </ul>
             </div>
           </div>
         </nav>
-       
+
 
         <div class="container-fluid py-4">
           <div class="row">
             <div class="col-12">
               <div class="card mb-4">
-                
+
                 <div class="card-body px-0 pt-0 pb-2">
                   <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          
+
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sản phẩm</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Danh mục</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
@@ -100,14 +100,14 @@
                         </tr>
                       </thead>
                       <tbody id="product-list">
-                        
+
                         @foreach($products as $key => $show_product)
                           @php
                             $stt = ($products->currentPage() - 1) * $products->perPage() + $key + 1;
                           @endphp
-                          
+
                             <tr data-category-id="{{$show_product->category_id}}">
-                              
+
                               <td>
                                 <div class="d-flex px-2 py-1">
                                   <p class="text-xs text-secondary mb-0 product-stt" style="margin-top: 10px; margin-right:8px">{{ $stt }}</p>
@@ -145,16 +145,22 @@
                               </td>
                               <td class="align-middle">
                                 <a href="{{URL::to('/edit-product/'.$show_product->product_id)}}" class="text-secondary font-weight-bold text-xs">Edit</a>
+                                  <a onclick="return confirm('Are you sure to delete?')"
+                                     class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                     href="{{URL::to('/delete-product/'.$show_product->product_id)}}"
+                                     title="Xoá danh mục">
+                                      <i class="far fa-trash-alt me-2"></i>Delete
+                                  </a>
                               </td>
                             </tr>
-                         
+
                         @endforeach
                       </tbody>
-                      
-                      
+
+
                     </table>
 
-                    
+
                   </div>
                 </div>
               </div>
@@ -162,16 +168,16 @@
           </div>
           <div class="pagination mt-3">
             {{ $products->links('admin.custom_pagination') }}
-            
+
            </div>
-        
+
         </div>
 
-        
 
-        
+
+
     </main>
-    
+
     <!-- Bộ lọc -->
     <div class="fixed-plugin">
       <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -181,14 +187,14 @@
         <div class="card-header pb-0 pt-3 ">
           <div class="float-start">
             <h5 class="mt-3 mb-0">Bộ lọc</h5>
-            
+
           </div>
           <div class="float-end mt-4">
             <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
               <i class="fa fa-close"></i>
             </button>
           </div>
-          
+
         </div>
         {{-- <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
               <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
@@ -198,13 +204,13 @@
               <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span> --}}
         <hr class="horizontal dark my-1">
         <div class="card-body pt-sm-3 pt-0">
-          
+
           <div id="price-filter">
             <h6 class="mb-0">Giá bán</h6>
-          
-          
+
+
             <div class="badge-colors my-2 text-start">
-              
+
 
               <input type="checkbox" value="1"> Dưới 100,000 ₫
               <br>
@@ -219,23 +225,23 @@
 
           <div id="status-filter">
             <h6 class="mb-0">Trạng thái</h6>
-          
-          
+
+
             <div class="badge-colors my-2 text-start">
-              
+
 
               <input type="checkbox" value="1"> Hiện
               <br>
               <input type="checkbox" value="2"> Ẩn
               <br>
               <input type="checkbox" value="0"> Chờ xử lý
-              
+
             </div>
           </div>
-          
-          
-          
-          
+
+
+
+
           <hr class="horizontal dark my-sm-4">
 
           <div id="category-filter">
@@ -249,10 +255,10 @@
               @endforeach
             </div>
           </div>
-          
-          
 
-          
+
+
+
 
         </div>
       </div>
@@ -263,25 +269,25 @@
               var priceFilters = [];
               var statusFilters = [];
               var categoryFilters = [];
-  
+
               $('#price-filter input[type="checkbox"]:checked').each(function() {
                   priceFilters.push($(this).val());
               });
-  
+
               $('#status-filter input[type="checkbox"]:checked').each(function() {
                   statusFilters.push($(this).val());
               });
-  
+
               $('.category-checkbox:checked').each(function() {
                   categoryFilters.push($(this).val());
               });
-  
+
               // Lọc tất cả các sản phẩm và ẩn hoặc hiển thị dựa trên các giá trị đã chọn
               $('#product-list tr').each(function() {
                   var price = parseFloat($(this).find('.product-price').data('price'));
                   var status = $(this).find('.product-status').text().trim();
                   var category_id = $(this).data('category-id');
-  
+
                   var shouldDisplay = (
                       (priceFilters.length === 0 || (
                           (priceFilters.includes('1') && price < 100000) ||
@@ -296,7 +302,7 @@
                       )) &&
                       (categoryFilters.length === 0 || categoryFilters.includes(category_id.toString()))
                   );
-  
+
                   if (shouldDisplay) {
                       $(this).show();
                   } else {
@@ -307,8 +313,8 @@
       });
   </script> --}}
 
-  
-  
+
+
 
     <script>
       $(document).ready(function() {
@@ -316,25 +322,25 @@
           var priceFilters = [];
           var statusFilters = [];
           var categoryFilters = [];
-    
+
           $('#price-filter input[type="checkbox"]:checked').each(function() {
             priceFilters.push($(this).val());
           });
-    
+
           $('#status-filter input[type="checkbox"]:checked').each(function() {
             statusFilters.push($(this).val());
           });
-    
+
           $('.category-checkbox:checked').each(function() {
             categoryFilters.push($(this).val());
           });
-    
+
           // Lọc sản phẩm và hiển thị hoặc ẩn dựa trên các giá trị đã chọn
           var displayedProducts = $('#product-list tr').filter(function() {
             var price = parseFloat($(this).find('.product-price').data('price'));
             var status = $(this).find('.product-status').text().trim();
             var category_id = $(this).data('category-id');
-    
+
             var shouldDisplay = (
               (priceFilters.length === 0 || (
                 (priceFilters.includes('1') && price < 100000) ||
@@ -349,16 +355,16 @@
               )) &&
               (categoryFilters.length === 0 || categoryFilters.includes(category_id.toString()))
             );
-    
+
             if (shouldDisplay) {
               $(this).show();
             } else {
               $(this).hide();
             }
-    
+
             return shouldDisplay;
           });
-    
+
           // Cập nhật lại STT dựa trên danh sách sản phẩm hiển thị
           displayedProducts.each(function(index) {
             $(this).find('.product-stt').text(index + 1);
@@ -366,10 +372,10 @@
         });
       });
     </script>
-    
-    
-    
-    
+
+
+
+
     <script>
       // $(document).ready(function() {
       //     $('#price-filter input[type="checkbox"]').on('click', function() {
@@ -447,6 +453,6 @@
 
 
     <script src="{{asset('js/admin.js')}}"></script>
-    
+
 </body>
 </html>

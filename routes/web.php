@@ -128,10 +128,11 @@ Route::put('category/{category_detail_id}', 'CategoryProduct@update')->name('cat
 
 
 
-/// Product 
+/// Product
 Route::get('/category-list', [CategoryProduct::class, 'category_product']);
 Route::get('/product-list', [ProductController::class, 'product_list']);
 Route::get('/add-product', [ProductController::class, 'add_product']);
+Route::get('/delete-product/{product_id}', [ProductController::class, 'delete_product']);
 Route::get('/show-product-cate/{category_id}/{category_detail_id}', [ProductController::class, 'show_product_cate']);
 Route::post('/add-product-cate/{category_id}/{category_detail_id}', [ProductController::class, 'add_product_cate'])->name('add_product_cate');
 

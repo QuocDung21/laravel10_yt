@@ -89,11 +89,11 @@
                 <p class="mb-0" style="margin-top: 20px">CN1:</p>
                 <p class="mb-0">CN2:</p>
                 <p class="mb-0">CN3:</p>
-                <p class="mt-0">Điện thoại: 0877 71 75 75.  Email: tuanthanhktltk21@gmail.com</p>
+                <p class="mt-0">Điện thoại:  Email:</p>
                 
-                <p class="mb-0" style="margin-top: 20px">GPDKKD: 40M8003513</p>
+                <p class="mb-0" style="margin-top: 20px">GPDKKD: </p>
                 <p class="mt-0 mb-0">
-                    do Phòng Tài Chính - Kế Hoạch huyện Krông Bông cấp lần đầu ngày 13/09/2022, đăng ký thay đổi lần thứ: 1, ngày 08/11/2022.
+                    
                 </p>
             </div>
         </div>

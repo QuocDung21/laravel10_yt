@@ -16,32 +16,41 @@ session_start();
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('home');
     }
 
-    public function footer(){
+    public function footer()
+    {
         return view('partial.footer');
     }
 
-    public function upload(){
+    public function upload()
+    {
         return view('upload');
     }
 
-    public function cart(){
+    public function cart()
+    {
         return view('cart');
     }
 
-    public function checkout(){
+    public function checkout()
+    {
         return view('checkout');
     }
-    public function detail(){
+
+    public function detail()
+    {
         return view('detail');
     }
-    public function category(){
+
+    public function category()
+    {
         return view('category');
     }
-    
+
     public function register(Request $request)
     {
         $userPhone = $request->register_phone;
@@ -50,44 +59,46 @@ class HomeController extends Controller
         $userExists = DB::table('tbl_user')->where('user_phone', $userPhone)->exists();
 
         if ($userExists) {
-            
+
             return back()->withErrors(['register_phone' => 'Số điện thoại đã tồn tại trong hệ thống.'])->withInput();
-            
+
         } else {
-           
+
             $data = array();
             $data['user_phone'] = $userPhone;
             $data['user_password'] = $request->register_password;
 
-            
+
             DB::table('tbl_user')->insert($data);
             session()->flash('success_message', 'Đăng ký thành công!');
 
-           
+
             return back();
         }
     }
-    
-    
-    public function login(Request $request){
+
+
+    public function login(Request $request)
+    {
         $user_phone = $request->user_phone;
         $user_password = $request->user_password;
         $result = DB::table('tbl_user')->where('user_phone', $user_phone)->where('user_password', $user_password)->first();
-        
-        if($result){
+
+        if ($result) {
             Session::put('user_name', $result->user_name);
             Session::put('user_phone', $result->user_phone);
             Session::put('user_id', $result->user_id);
-            
-            
-            
+
+
             return Redirect::to('/account');
-        } else{
+        } else {
             return back()->withErrors(['login_error' => 'Thông tin đăng nhập không chính xác'])->withInput();
-        }   
-        
+        }
+
     }
-    public function userlogout(){
+
+    public function userlogout()
+    {
         Session::put('user_name', null);
         Session::put('user_phone', null);
         Session::put('user_id', null);
@@ -99,33 +110,35 @@ class HomeController extends Controller
         return Redirect::to('/');
 
     }
-    public function saveaccount(Request $request){
-        
+
+    public function saveaccount(Request $request)
+    {
+
         $id = $request->input('user_id');
         $name = $request->input('user_name');
         $sex = $request->input('user_sex');
         $bithday = $request->input('user_bithday');
-        
+
         $email = $request->input('user_email');
 
         DB::table('tbl_user')
-        ->where('user_id', $id)
-        ->update([
-            'user_name' => $name,
-            'user_sex' => $sex,
-            'user_bithday' => $bithday,
-            
-            'user_email' => $email,
-        ]);
+            ->where('user_id', $id)
+            ->update([
+                'user_name' => $name,
+                'user_sex' => $sex,
+                'user_bithday' => $bithday,
+
+                'user_email' => $email,
+            ]);
         Session::put('user_name', $name);
 
 
         return redirect()->back();
-        
-        
+
+
     }
-   
-    
+
+
     // public function address(Request $request){
     //     $data = array();
     //     $data['user_id'] = $request-> user_id;
@@ -176,24 +189,25 @@ class HomeController extends Controller
             'user_city_text' => $request->user_city_text,
             'user_district_text' => $request->user_district_text,
             'user_ward_text' => $request->user_ward_text,
-            
+
         ];
-        
+
 
         DB::table('tbl_user_address')->insert($data);
         return redirect('/checkout');
     }
 
-    public function update_address_md(Request $request){
+    public function update_address_md(Request $request)
+    {
         $user_id = $request->input('user_id');
         $address_id = $request->input('address_id');
-        
+
         // Kiểm tra xem địa chỉ có thuộc về người dùng hiện tại không
         $address = DB::table('tbl_user_address')
             ->where('id_address', $address_id)
             ->where('user_id', $user_id)
             ->first();
-            
+
         if ($address) {
             // Đánh dấu địa chỉ được chọn là mặc định
             DB::table('tbl_user_address')
@@ -207,9 +221,10 @@ class HomeController extends Controller
         }
         return back();
     }
-    public function pay(Request $request){
-        
-        
+
+    public function pay(Request $request)
+    {
+
 
         $userId = $request->user_id;
         $paymentMethod = $request->payment_method;
@@ -225,7 +240,7 @@ class HomeController extends Controller
         $billdiscount = $request->bill_discount;
         $billshipping = $request->bill_shipping;
 
-        
+
         // Thực hiện insert vào bảng bill
         $billData = [
             'user_id' => $userId,
@@ -248,7 +263,7 @@ class HomeController extends Controller
             $quantity = $productQuantities[$key];
             $price = $productPrices[$key];
             $priceOld = $productPricesOld[$key];
-    
+
             $billDetailData = [
                 'bill_id' => $billId,
                 'product_id' => $productId,
@@ -262,7 +277,7 @@ class HomeController extends Controller
 
         return back();
         // $billId = DB::table('tbl_bill')->insert([
-            
+
         // ]);
 
         // // Lưu chi tiết hóa đơn vào cơ sở dữ liệu
@@ -294,9 +309,9 @@ class HomeController extends Controller
 
         return view('client.address')->with('categories', $categories)->with('categorie', $categorie)->with('addresses', $addresses);
 
-        
-        
+
     }
+
     public function show_category_orders()
     {
         $categories = DB::table('tbl_category_product')->where('category_status', 1)->get();
@@ -309,44 +324,48 @@ class HomeController extends Controller
         $order_2 = DB::table('tbl_bill')->where('user_id', $user_id)->where('bill_status', 2)->orderBy('created_at', 'desc')->get();
         $order_3 = DB::table('tbl_bill')->where('user_id', $user_id)->where('bill_status', 3)->orderBy('created_at', 'desc')->get();
         $order_4 = DB::table('tbl_bill')->where('user_id', $user_id)->where('bill_status', 4)->orderBy('created_at', 'desc')->get();
-        
+
 
         return view('client.orders')->with('categories', $categories)
-                                    ->with('categorie', $categorie)
-                                    ->with('order_0', $order_0)
-                                    ->with('order_1', $order_1)
-                                    ->with('order_2', $order_2)
-                                    ->with('order_3', $order_3)
-                                    ->with('order_4', $order_4)
-                                    ->with('addresses', $addresses); 
+            ->with('categorie', $categorie)
+            ->with('order_0', $order_0)
+            ->with('order_1', $order_1)
+            ->with('order_2', $order_2)
+            ->with('order_3', $order_3)
+            ->with('order_4', $order_4)
+            ->with('addresses', $addresses);
     }
-    public function update_shipping_method(Request $request){
+
+    public function update_shipping_method(Request $request)
+    {
         $shipping_id = $request->selected_shipping_item_id;
         $hasOtherDefault = DB::table('tbl_shipping_unit')
-                    ->where('shipping_id', '!=', $shipping_id)
-                    ->where('is_default', 1)
-                    ->exists();
+            ->where('shipping_id', '!=', $shipping_id)
+            ->where('is_default', 1)
+            ->exists();
 
         if ($hasOtherDefault) {
             // Nếu có bản ghi khác có is_default = 1, hạ xuống 0
             DB::table('tbl_shipping_unit')
-                                            ->where('shipping_id', '!=', $shipping_id)
-                                            ->update(['is_default' => 0]);
+                ->where('shipping_id', '!=', $shipping_id)
+                ->update(['is_default' => 0]);
         }
 
         // Tiếp tục nâng mục được chọn lên 1
         DB::table('tbl_shipping_unit')
-                                    ->where('shipping_id', $shipping_id)
-                                    ->update(['is_default' => 1]);
+            ->where('shipping_id', $shipping_id)
+            ->update(['is_default' => 1]);
         return back();
     }
-    public function upload_image(Request $request){
+
+    public function upload_image(Request $request)
+    {
         $image = $request->file('image');
         if ($image) {
             // Generate a unique filename for the uploaded image
             $currentDateTime = date('Y-m-d_H-i-s');
             $new_image = 'user_avatar_' . $currentDateTime . '.' . $image->getClientOriginalExtension();
-            
+
             // Move the uploaded image to the 'uploads/user' directory
             $image->move('uploads/user', $new_image);
 
@@ -361,84 +380,90 @@ class HomeController extends Controller
             return back();
         }
     }
-    public function show_category_orderdetail($orderId){
+
+    public function show_category_orderdetail($orderId)
+    {
         $categories = DB::table('tbl_category_product')->where('category_status', 1)->get();
         $categorie = DB::table('tbl_category_product_detail')->where('category_detail_status', 1)->get();
         $user = DB::table('tbl_user')->where('user_id', Session::get('user_id'))->first();
 
         $order = DB::table('tbl_bill')->where('bill_id', $orderId)->first();
         $address = DB::table('tbl_user_address')->where('id_address', $order->id_address)->first();
-        if($order){
+        if ($order) {
             $orderItems = DB::table('tbl_bill_detail')->where('bill_id', $orderId)->get();
-            foreach($orderItems as $item){
+            foreach ($orderItems as $item) {
                 $product = DB::table('tbl_product')->where('product_id', $item->product_id)->first();
-                $item->product= $product;
+                $item->product = $product;
 
             }
         }
         // Pass the user_sex value to the view
-        
+
         return view('client.orderdetail')->with('categories', $categories)
-                                         ->with('categorie', $categorie)
-                                         ->with('user', $user)
-                                         ->with('order', $order)
-                                         ->with('address', $address)
-                                         ->with('orderItems', $orderItems);
+            ->with('categorie', $categorie)
+            ->with('user', $user)
+            ->with('order', $order)
+            ->with('address', $address)
+            ->with('orderItems', $orderItems);
     }
 
-    public function show_category_home($category_id){
+    public function show_category_home($category_id)
+    {
         $categories = DB::table('tbl_category_product')->where('category_status', 1)->get();
         $categorie = DB::table('tbl_category_product_detail')->where('category_detail_status', 1)->get();
         $user = DB::table('tbl_user')->where('user_id', Session::get('user_id'))->first();
-        
+
 
         $cate = DB::table('tbl_category_product')->where('category_id', $category_id)->first();
         $cate_product = [];
-        if($cate){
+        if ($cate) {
             $productsPerPage = 20;
             $cate_product = DB::table('tbl_product')->where('category_id', $category_id)->get();
             $cate_detail = DB::table('tbl_category_product_detail')->where('category_id', $category_id)->get();
             $product = DB::table('tbl_product')->where('category_id', $category_id)->where('product_status', 1)->paginate($productsPerPage);
-        } 
-        
+        }
+
 
         return view('category')->with('cate', $cate)
-                               ->with('product', $product)
-                               ->with('cate_detail', $cate_detail)
-                               ->with('cate_product', $cate_product)
-                               ->with('categories', $categories)
-                               ->with('categorie', $categorie)
-                               ->with('user', $user);
+            ->with('product', $product)
+            ->with('cate_detail', $cate_detail)
+            ->with('cate_product', $cate_product)
+            ->with('categories', $categories)
+            ->with('categorie', $categorie)
+            ->with('user', $user);
     }
-    
 
-    
 
-    public function login_facebook_customer(){
+    public function login_facebook_customer()
+    {
         config(['services.facebook.redirect' => env('FACEBOOK_CLIENT_REDIRECT')]);
 
         // Chuyển hướng người dùng đến trang xác thực đăng nhập bằng Facebook
         return Socialite::driver('facebook')->redirect();
 
     }
-    public function callback_facebook_customer(){
+
+    public function callback_facebook_customer()
+    {
         config(['services.facebook.redirect' => env('FACEBOOK_CLIENT_REDIRECT')]);
         $provider = Socialite::driver('facebook')->user();
         dd($provider);
     }
-    public function show_change_password(){
+
+    public function show_change_password()
+    {
         // $user = DB::table('tbl_user')->where('user_id', $userId)->first();
         // if($user){
-            
-            $categories = DB::table('tbl_category_product')->where('category_status', 1)->get();
-            $categorie = DB::table('tbl_category_product_detail')->where('category_detail_status', 1)->get();
-            $user = DB::table('tbl_user')->where('user_id', Session::get('user_id'))->first();
-    
-            
+
+        $categories = DB::table('tbl_category_product')->where('category_status', 1)->get();
+        $categorie = DB::table('tbl_category_product_detail')->where('category_detail_status', 1)->get();
+        $user = DB::table('tbl_user')->where('user_id', Session::get('user_id'))->first();
+
+
         // }
         return view('client.changepassword')->with('categories', $categories)
-                                            ->with('categorie', $categorie)
-                                            ->with('user' , $user);;
+            ->with('categorie', $categorie)
+            ->with('user', $user);;
         // return view('client.changepassword')->with('categories', $categories)
         //                                         ->with('categorie', $categorie)
         //                                         ->with('currentUser', $currentUser)
@@ -446,23 +471,25 @@ class HomeController extends Controller
 
 
     }
-    public function new_change_password(Request $request, $userId){
+
+    public function new_change_password(Request $request, $userId)
+    {
         $old_password = $request->user_password_account;
         $new_password = $request->user_password_account_2;
         $config_password = $request->user_password_account_3;
         // $user_id = $request->user_id_change;
 
-        if($new_password !== $config_password){
+        if ($new_password !== $config_password) {
             Session::flash('error3', 'Xác nhận mật khẩu không chính xác.');
             return back();
         }
-        if(strlen($new_password) < 8){
+        if (strlen($new_password) < 8) {
             Session::flash('error2', 'Mật khẩu mới phải có ít nhất 8 ký tự.');
             return back();
         }
 
         $user = DB::table('tbl_user')->where('user_id', $userId)->first();
-        if($old_password !== $user->user_password){
+        if ($old_password !== $user->user_password) {
             Session::flash('error', 'Mật khẩu hiện tại không chính xác.');
             return back();
         }
@@ -472,10 +499,12 @@ class HomeController extends Controller
         ]);
         Session::flash('success', 'Mật khẩu đã được cập nhật thành công.');
         return back();
-    
-       
+
+
     }
-    public function submitPrescription(Request $request){
+
+    public function submitPrescription(Request $request)
+    {
         $data = array();
 
         $data['prescription_desc'] = $request->uploadDesc;
@@ -485,10 +514,10 @@ class HomeController extends Controller
         $prescription_id = DB::table('tbl_prescription')->insertGetId($data);
 
         $prescription_images = $request->hiddenImageInput;
-        if(!empty($prescription_images)){
+        if (!empty($prescription_images)) {
             $imageNames = explode(',', $prescription_images);
             $prescriptionData = [];
-            foreach($imageNames as $imageName){
+            foreach ($imageNames as $imageName) {
                 $prescriptionData[] = [
                     'prescription_id' => $prescription_id,
                     'prescription_image' => $imageName,
@@ -500,8 +529,8 @@ class HomeController extends Controller
     }
 
     public function show_home()
-    {   
-        
+    {
+
         $product = DB::table('tbl_product')
             ->join('tbl_category_product_detail', 'tbl_product.category_detail_id', '=', 'tbl_category_product_detail.category_detail_id')
             ->join('tbl_category_product', 'tbl_category_product_detail.category_id', '=', 'tbl_category_product.category_id')
@@ -509,75 +538,82 @@ class HomeController extends Controller
             ->orderBy('tbl_product.created_at_product', 'desc')
             ->get();
         $categories = DB::table('tbl_category_product')
-                ->where('category_status', 1)
-                ->orderBy('display_order')
-                ->get();
+            ->where('category_status', 1)
+            ->orderBy('display_order')
+            ->get();
         $categorie = DB::table('tbl_category_product_detail')->where('category_detail_status', 1)->get();
         $cate_post = DB::table('tbl_category_post')->where('cate_post_status', 0)->orderBy('display_order')->get();
-        $post = DB::table('tbl_posts')->where('post_status', 0 )->get();
+        $post = DB::table('tbl_posts')->where('post_status', 0)->get();
         return view('home')->with('categories', $categories)
-                           ->with('categorie', $categorie)
-                           ->with('product', $product)
-                           ->with('cate_post', $cate_post)
-                           ->with('post', $post);
-        
+            ->with('categorie', $categorie)
+            ->with('product', $product)
+            ->with('cate_post', $cate_post)
+            ->with('post', $post);
+
     }
+
     public function sendEmail(Request $request)
     {
         $email = $request->email;
 
-       
+
         $existingEmail = DB::table('tbl_email_promotional')->where('email', $email)->first();
 
         if ($existingEmail) {
             return response()->json(['message' => 'Địa chỉ email đã tồn tại.']);
         } else {
-            
+
             $isInserted = DB::table('tbl_email_promotional')->insert([
                 'email' => $email
             ]);
 
             if ($isInserted) {
-              
+
                 return response()->json(['message' => 'Đăng ký nhận thông tin khuyến mãi thành công!']);
             } else {
                 return response()->json(['message' => 'Đăng ký thất bại. Vui lòng thử lại sau.'], 500);
             }
         }
     }
-    public function login_google_client(){
+
+    public function login_google_client()
+    {
         config(['services.google.redirect' => 'http://127.0.0.1:8000/client/google/callback']);
         return Socialite::driver('google')->redirect();
     }
-    public function handleGoogleCallback(){
+
+    public function handleGoogleCallback()
+    {
         config(['services.google.redirect' => 'http://127.0.0.1:8000/client/google/callback']);
         $user = Socialite::driver('google')->user();
         // dd($user);
         $existingUser = DB::table('tbl_user')->where('user_email', $user->getEmail())->first();
-        if(!$existingUser){
+        if (!$existingUser) {
             DB::table('tbl_user')->insert([
                 'user_name' => $user->getName(),
                 'user_email' => $user->getEmail(),
             ]);
 
             $result = DB::table('tbl_user')->where('user_email', $user->getEmail())->first();
-            if($result){
+            if ($result) {
                 Session::put('user_name', $result->user_name);
                 Session::put('user_id', $result->user_id);
                 return Redirect::to('/account');
             }
         }
         $result2 = DB::table('tbl_user')->where('user_email', $user->getEmail())->first();
-        if($result2){
+        if ($result2) {
             Session::put('user_name', $result2->user_name);
             Session::put('user_id', $result2->user_id);
             return Redirect::to('/account');
         }
     }
-    public function vnpay_payments(){
+
+    public function vnpay_payments()
+    {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         // $vnp_Returnurl = "http://127.0.0.1:8000/checkout";
-        // $vnp_TmnCode = "";//Mã website tại VNPAY 
+        // $vnp_TmnCode = "";//Mã website tại VNPAY
         // $vnp_HashSecret = ""; //Chuỗi bí mật
 
         // $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
@@ -664,7 +700,7 @@ class HomeController extends Controller
 
         // $vnp_Url = $vnp_Url . "?" . $query;
         // if (isset($vnp_HashSecret)) {
-        //     $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
+        //     $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
         //     $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         // }
         // $returnData = array('code' => '00'
@@ -677,7 +713,9 @@ class HomeController extends Controller
         //         echo json_encode($returnData);
         //     }
     }
-    public function filterProducts(Request $request){
+
+    public function filterProducts(Request $request)
+    {
         $sortingOption = $request->input('sorting');
         $categoryId = $request->input('category_id');
 
@@ -687,7 +725,7 @@ class HomeController extends Controller
             ->join('tbl_category_product', 'tbl_category_product_detail.category_id', '=', 'tbl_category_product.category_id')
             ->where('tbl_product.product_status', 1);
 
-        
+
         if ($sortingOption === 'newest') {
             $query->orderByDesc('created_at_product');
         } elseif ($sortingOption === 'price_desc') {
@@ -697,13 +735,10 @@ class HomeController extends Controller
         }
 
         $filteredProducts = $query->get();
-            
+
 
         return response()->json(['products' => $filteredProducts]);
     }
 
-
-
-    
 
 }
